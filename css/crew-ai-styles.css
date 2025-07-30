@@ -1,0 +1,553 @@
+/* CrewAI Integration Styles */
+.crew-controls {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.crew-selector, .flow-selector {
+    margin-bottom: 10px;
+}
+
+.crew-selector label, .flow-selector label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+.crew-mode-select, .flow-mode-select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--bg-color);
+    color: var(--text-color);
+    font-size: 14px;
+}
+
+.crew-mode-select:focus, .flow-mode-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(30, 58, 138, 0.1);
+}
+
+/* Crew Status */
+.crew-status {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.active-agents {
+    display: flex;
+    gap: 5px;
+}
+
+.flow-progress {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Crew Quick Actions */
+.crew-quick-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border-color);
+}
+
+.crew-action {
+    background: linear-gradient(135deg, var(--primary-color), #3b82f6);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.crew-action:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+/* Agent Indicators */
+.agent-indicators {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 280px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    display: none;
+}
+
+.agent-indicators.active {
+    display: block;
+}
+
+.agents-panel h4 {
+    margin: 0 0 15px 0;
+    font-size: 16px;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.agent-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.agent-indicator {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: var(--bg-color);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.agent-indicator:hover {
+    border-color: var(--primary-color);
+    transform: translateX(5px);
+}
+
+.agent-indicator .agent-icon {
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary-color);
+    border-radius: 50%;
+    color: white;
+}
+
+.agent-details {
+    flex: 1;
+}
+
+.agent-role {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text-color);
+    margin-bottom: 2px;
+}
+
+.agent-specializations {
+    font-size: 12px;
+    color: var(--text-secondary);
+    opacity: 0.8;
+}
+
+/* Agent Messages */
+.agent-message {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 16px;
+    margin: 12px 0;
+    position: relative;
+}
+
+.agent-message-collaborative {
+    border-left: 4px solid #10b981;
+}
+
+.agent-message-worker {
+    border-left: 4px solid #f59e0b;
+}
+
+.agent-message-final {
+    border-left: 4px solid #8b5cf6;
+    background: linear-gradient(135deg, var(--card-bg), rgba(139, 92, 246, 0.05));
+}
+
+.message-header {
+    display: flex;
+    justify-content: between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.agent-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.agent-info .agent-icon {
+    font-size: 20px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary-color);
+    border-radius: 50%;
+    color: white;
+}
+
+.agent-role {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--primary-color);
+}
+
+.message-time {
+    font-size: 12px;
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+.message-content {
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+/* System Messages */
+.system-message {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1));
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin: 8px 0;
+    font-size: 14px;
+    color: var(--text-color);
+}
+
+.system-message .system-icon {
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+.error-message {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(220, 38, 38, 0.1));
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin: 8px 0;
+    font-size: 14px;
+    color: var(--text-color);
+}
+
+.error-message .error-icon {
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+/* Crew Thinking Animation */
+.crew-thinking {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 20px;
+    margin: 12px 0;
+}
+
+.thinking-agents {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.thinking-agent {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    background: var(--bg-color);
+    border-radius: 12px;
+}
+
+.thinking-agent .agent-icon {
+    font-size: 18px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary-color);
+    border-radius: 50%;
+    color: white;
+}
+
+.agent-name {
+    flex: 1;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.thinking-animation {
+    display: flex;
+    gap: 4px;
+}
+
+.thinking-animation span {
+    width: 6px;
+    height: 6px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    animation: thinking-pulse 1.4s infinite ease-in-out;
+}
+
+.thinking-animation span:nth-child(1) {
+    animation-delay: -0.32s;
+}
+
+.thinking-animation span:nth-child(2) {
+    animation-delay: -0.16s;
+}
+
+@keyframes thinking-pulse {
+    0%, 80%, 100% {
+        transform: scale(0.6);
+        opacity: 0.5;
+    }
+    40% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.crew-status {
+    text-align: center;
+    font-size: 14px;
+    color: var(--primary-color);
+    font-weight: 500;
+    padding: 8px;
+    background: rgba(30, 58, 138, 0.1);
+    border-radius: 8px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .agent-indicators {
+        position: fixed;
+        right: 10px;
+        left: 10px;
+        top: auto;
+        bottom: 120px;
+        transform: none;
+        width: auto;
+    }
+    
+    .crew-quick-actions {
+        flex-direction: column;
+    }
+    
+    .crew-action {
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .thinking-agents {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .thinking-agent {
+        flex-direction: column;
+        text-align: center;
+        min-width: 80px;
+    }
+    
+    .agent-name {
+        font-size: 11px;
+    }
+}
+
+/* Dark Mode Adjustments */
+[data-theme="dark"] .crew-controls {
+    background: rgba(30, 41, 59, 0.8);
+    border-color: rgba(71, 85, 105, 0.3);
+}
+
+[data-theme="dark"] .agent-indicators {
+    background: rgba(30, 41, 59, 0.9);
+    border-color: rgba(71, 85, 105, 0.3);
+}
+
+[data-theme="dark"] .agent-indicator {
+    background: rgba(51, 65, 85, 0.5);
+    border-color: rgba(71, 85, 105, 0.3);
+}
+
+[data-theme="dark"] .crew-thinking {
+    background: rgba(30, 41, 59, 0.8);
+    border-color: rgba(71, 85, 105, 0.3);
+}
+
+[data-theme="dark"] .thinking-agent {
+    background: rgba(51, 65, 85, 0.5);
+}
+
+/* Animation for crew activation */
+.crew-controls.activating {
+    animation: crew-activation 0.6s ease-out;
+}
+
+@keyframes crew-activation {
+    0% {
+        transform: scale(0.95);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1.02);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Flow Progress Indicator */
+.flow-progress-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(30, 58, 138, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 8px;
+}
+
+.flow-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), #3b82f6);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+    animation: flow-progress-glow 2s infinite alternate;
+}
+
+@keyframes flow-progress-glow {
+    0% {
+        box-shadow: 0 0 5px rgba(30, 58, 138, 0.5);
+    }
+    100% {
+        box-shadow: 0 0 15px rgba(30, 58, 138, 0.8);
+    }
+}
+
+/* Agent collaboration indicator */
+.agent-collaboration {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: -5px;
+}
+
+.agent-collaboration .agent-icon {
+    position: relative;
+    z-index: 1;
+    border: 2px solid var(--bg-color);
+}
+
+.agent-collaboration .agent-icon:not(:first-child) {
+    margin-left: -10px;
+}
+
+.collaboration-line {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    right: 15px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+    animation: collaboration-pulse 2s infinite;
+}
+
+@keyframes collaboration-pulse {
+    0%, 100% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Crew result cards */
+.crew-result-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 20px;
+    margin: 16px 0;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.crew-result-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.crew-result-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.crew-result-content {
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+/* Mobile optimizations */
+@media (max-width: 480px) {
+    .crew-controls {
+        padding: 12px;
+    }
+    
+    .crew-mode-select, .flow-mode-select {
+        font-size: 16px; /* Prevent zoom on iOS */
+    }
+    
+    .agent-message {
+        padding: 12px;
+        border-radius: 12px;
+    }
+    
+    .message-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}

@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Darcy AI - Tutor Educacional Open Source</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="Tutor de IA educacional open source especializado em educação musical">
+    <meta name="theme-color" content="#1e3a8a">
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/avatar-multimodal.css">
+    <link rel="stylesheet" href="css/crew-ai-styles.css">
+    
+    <!-- VLibras Accessibility -->
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+</head>
+<body>
+    <!-- VLibras Widget -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-spinner"></div>
+        <p>Carregando Darcy AI...</p>
+    </div>
+
+    <!-- Main App Container -->
+    <div id="app" class="app-container" style="display: none;">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo">🎓</div>
+                    <div class="title-section">
+                        <h1>Darcy AI</h1>
+                        <p class="subtitle">Tutor Educacional Open Source</p>
+                    </div>
+                </div>
+                
+                <div class="header-controls">
+                    <button id="settings-btn" class="icon-btn" title="Configurações" aria-label="Abrir configurações">
+                        ⚙️
+                    </button>
+                    <button id="theme-toggle" class="icon-btn" title="Alternar tema" aria-label="Alternar entre tema claro e escuro">
+                        🌙
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Chat Container -->
+            <div class="chat-container">
+                <div id="chat-messages" class="chat-messages" role="log" aria-live="polite" aria-label="Mensagens do chat">
+                    <!-- Messages will be dynamically added here -->
+                </div>
+                
+                <!-- Typing Indicator -->
+                <div id="typing-indicator" class="typing-indicator" style="display: none;">
+                    <div class="message-avatar">🎓</div>
+                    <div class="typing-animation">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="input-area">
+                <div class="input-container">
+                    <div class="input-wrapper">
+                        <textarea 
+                            id="user-input" 
+                            class="user-input" 
+                            placeholder="Digite sua mensagem..." 
+                            rows="1"
+                            aria-label="Campo de entrada de mensagem"
+                            maxlength="2000"
+                        ></textarea>
+                        
+                        <div class="input-actions">
+                            <button id="file-btn" class="action-btn" title="Anexar arquivo" aria-label="Anexar arquivo">
+                                📎
+                            </button>
+                            <button id="voice-btn" class="action-btn" title="Gravação de voz" aria-label="Iniciar gravação de voz">
+                                🎤
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <button id="send-btn" class="send-btn" title="Enviar mensagem" aria-label="Enviar mensagem">
+                        <span class="send-icon">➤</span>
+                    </button>
+                </div>
+                
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <button class="quick-action" data-action="web-search">🔍 Buscar na Web</button>
+                    <button class="quick-action" data-action="explain">💡 Explicar Conceito</button>
+                    <button class="quick-action" data-action="practice">🎯 Exercícios</button>
+                    <button class="quick-action" data-action="summarize">📋 Resumir</button>
+                </div>
+                
+                <!-- File Input (Hidden) -->
+                <input type="file" id="file-input" multiple accept=".pdf,.doc,.docx,.txt,.md,.mp3,.wav,.mp4,.jpg,.jpeg,.png" style="display: none;">
+            </div>
+        </main>
+
+        <!-- Settings Modal -->
+        <div id="settings-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Configurações</h2>
+                    <button id="close-settings" class="close-btn">&times;</button>
+                </div>
+                
+                <div class="modal-body">
+                    <div class="setting-group">
+                        <label for="llm-provider">Provedor de IA:</label>
+                        <select id="llm-provider">
+                            <option value="ollama">Ollama (Local)</option>
+                            <option value="openai">OpenAI</option>
+                            <option value="anthropic">Anthropic</option>
+                            <option value="cohere">Cohere</option>
+                        </select>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label for="api-key">Chave da API:</label>
+                        <input type="password" id="api-key" placeholder="Cole sua chave da API aqui">
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label for="model-select">Modelo:</label>
+                        <select id="model-select">
+                            <option value="llama2">Llama 2 (Local)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label>
+                            <input type="checkbox" id="voice-responses"> 
+                            Respostas por voz
+                        </label>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label>
+                            <input type="checkbox" id="save-history" checked> 
+                            Salvar histórico de conversas
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button id="save-settings" class="btn-primary">Salvar</button>
+                    <button id="reset-settings" class="btn-secondary">Resetar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>
+            <strong>Darcy AI</strong> - Projeto Open Source | 
+            <a href="https://github.com/seu-usuario/darcy-ai" target="_blank" rel="noopener">GitHub</a> | 
+            <a href="#" id="about-link">Sobre</a>
+        </p>
+    </footer>
+
+    <!-- Scripts -->
+    <!-- Primeiro, os módulos principais e sem dependências -->
+    <script src="js/config.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/ui-manager.js"></script>
+    <script src="js/avatar-system.js"></script>
+
+    <!-- Módulos que dependem dos principais -->
+    <script src="js/llm-providers.js"></script>
+    <script src="js/settings-panel.js"></script>
+    <script src="js/chat-interface.js"></script>
+    <script src="js/file-handler.js"></script>
+    
+    <!-- Módulos avançados que dependem dos anteriores -->
+    <script src="js/multimodal-system.js"></script>
+    <script src="js/crew-ai-integration.js"></script>
+    <script src="js/crew-ai-chat-interface.js"></script>
+
+    <!-- Finalmente, o script principal que inicializa tudo -->
+    <script src="script.js"></script>
+</body>
+</html>

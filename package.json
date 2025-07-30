@@ -1,0 +1,19 @@
+{
+  "name": "darcy-ai",
+  "version": "2.0.0",
+  "description": "Darcy AI - Avatar Tutor Multimodal com CrewAI",
+  "main": "index.html",
+  "scripts": {
+    "dev": "cd backend && npm start",
+    "build": "echo 'Build completed'",
+    "vercel-build": "cd backend && npm install"
+  },
+  "keywords": [
+    "ai",
+    "tutor",
+    "crewai",
+    "education"
+  ],
+  "author": "Darcy AI Team",
+  "license": "MIT"
+}
