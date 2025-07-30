@@ -1,0 +1,31 @@
+# Darcy AI Python Components
+# Requirements e configuração para componentes Python
+
+## Instalação Básica (Obrigatória)
+flask>=2.3.0
+flask-cors>=4.0.0
+requests>=2.31.0
+aiohttp>=3.8.0
+pathlib2>=2.3.7
+
+## Análise de Dados (Recomendada)
+pandas>=2.0.0
+numpy>=1.24.0
+
+## Processamento de Arquivos (Recomendada)
+PyPDF2>=3.0.0
+pymupdf>=1.23.0
+Pillow>=10.0.0
+pytesseract>=0.3.10
+
+## Machine Learning (Opcional)
+scikit-learn>=1.3.0
+nltk>=3.8
+
+## Web Scraping (Opcional)
+beautifulsoup4>=4.12.0
+selenium>=4.15.0
+
+## Utilitários
+python-dateutil>=2.8.2
+colorama>=0.4.6

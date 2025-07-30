@@ -282,7 +282,7 @@ class CrewAIChatInterface {
             //     conversationHistory: this.getConversationHistory(),
             -            //     timestamp: Date.now()
             // });
-            const response = await fetch('http://localhost:3000/api/v1/crew/execute', {
+            const response = await fetch('https://darcy-ai-seven.vercel.app/api/index', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

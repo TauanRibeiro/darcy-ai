@@ -1,32 +1,79 @@
-# 🤖 Darcy AI - Tutor Educacional com CrewAI
+# 🤖 Darcy AI - Tutor Educacional com Sistema Modular de LLMs
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/TauanRibeiro/darcy-ai)
 [![Status](https://img.shields.io/badge/Status-Production%20Ready-green)](https://github.com)
 [![Version](https://img.shields.io/badge/Version-2.1.0-blue)](https://github.com)
 [![License](https://img.shields.io/badge/License-MIT-yellow)](https://github.com)
 
-> **Darcy AI** é um tutor educacional inteligente com **sistema de agentes CrewAI**, avatar gamificado e capacidades multimodais completas. Oferece suporte técnico e pedagógico 24/7 com foco em tecnologias open source.
+> **Darcy AI** é um tutor educacional inteligente com **sistema modular de múltiplas LLMs gratuitas**, equipes especializadas CrewAI, avatar gamificado e capacidades multimodais completas. Funciona 100% sem API keys usando fallback automático entre provedores.
 
 ## 🎯 Características Principais
 
-### 🤖 Sistema CrewAI Multi-Agente
-- **Equipe de Ensino**: Especializada em criar lições e explicações
-- **Equipe de Pesquisa**: Busca informações na web e analisa dados
+### 🤖 Sistema Modular de LLMs (NOVO!)
+- **Múltiplos Provedores**: Ollama Local, Groq, Together AI, Hugging Face, Cohere, Perplexity
+- **Fallback Automático**: Se um provedor falha, usa outro automaticamente
+- **Health Monitoring**: Monitora saúde dos provedores em tempo real
+- **Seleção Inteligente**: Escolhe o melhor provedor para cada tipo de consulta
+- **100% Gratuito**: Funciona sem nenhuma API key usando simulação inteligente
+
+### 👥 Sistema CrewAI Multi-Agente
+- **Equipe de Ensino**: Especializada em criar lições e explicações didáticas
+- **Equipe de Pesquisa**: Busca informações e analisa dados academicamente
 - **Equipe Criativa**: Gera projetos e atividades inovadoras
-- **Equipe de Avaliação**: Cria testes e avalia progresso
-- **Fluxos Inteligentes**: Combinação automática de equipes
+- **Equipe de Avaliação**: Cria testes e avalia progresso construtivamente
+- **Fluxos Inteligentes**: Combinação automática de equipes conforme necessário
 
 ### 🎮 Sistema de Avatar Gamificado
 - **Personalidade Dinâmica**: Avatar com estados emocionais e reações
-- **Sistema de XP**: Progressão por níveis baseada em interações
+- **Sistema de XP**: Progressão por níveis baseada em interações 
 - **Animações**: Respiração, pensamento, fala e reações visuais
-- **Integração com Agentes**: Avatar reage às atividades das equipes
+- **Integração com LLMs**: Avatar reage às atividades dos diferentes provedores
 
 ### 🎙️ Capacidades Multimodais  
 - **Entrada de Áudio**: Reconhecimento de voz em tempo real
 - **Entrada de Texto**: Chat tradicional com markdown
 - **Processamento de Arquivos**: PDF, Excel, Word, imagens, vídeos
-- **Backend Node.js**: API segura para orquestração de agentes
+- **Backend Modular**: API inteligente com orquestração de múltiplas LLMs
+
+## 🤖 Provedores LLM Suportados
+
+### 🏠 Ollama Local (Recomendado)
+- **Status**: Automático (se instalado)
+- **Modelos**: llama3.1, mistral, codellama, phi3, gemma2, qwen2
+- **Vantagens**: Privacidade total, sem limites, funciona offline
+- **Instalação**: [ollama.com](https://ollama.com)
+
+### ⚡ Groq (Rápido)
+- **Status**: Gratuito com limitações
+- **Modelos**: llama-3.1-70b, llama-3.1-8b, mixtral-8x7b
+- **Vantagens**: Velocidade extrema, boa qualidade
+- **Limitações**: ~30 requests/minuto
+
+### 🤗 Hugging Face (Gratuito)
+- **Status**: Completamente gratuito
+- **Modelos**: DialoGPT, BlenderBot, Flan-T5
+- **Vantagens**: Sem custos, muitos modelos
+- **Limitações**: Velocidade variável
+
+### 🤖 Together AI (Créditos Gratuitos)
+- **Status**: $25 mensais gratuitos
+- **Modelos**: Llama-3-70b, Mixtral-8x7B, Nous-Hermes
+- **Vantagens**: Modelos avançados, boa performance
+
+### 🧠 Cohere (Trial)
+- **Status**: Trial gratuito
+- **Modelos**: Command, Command-Light
+- **Vantagens**: Boa para texto, API simples
+
+### 🔍 Perplexity AI
+- **Status**: Uso gratuito limitado
+- **Modelos**: Llama-3.1-Sonar (com busca web)  
+- **Vantagens**: Acesso a informações em tempo real
+
+### 🎯 Simulação Inteligente (Fallback)
+- **Status**: Sempre disponível
+- **Funcionalidade**: Respostas educacionais contextuais
+- **Vantagens**: Nunca falha, educacionalmente otimizada
 
 ## 🚀 Instalação e Deploy
 

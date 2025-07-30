@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/avatar-multimodal.css">
     <link rel="stylesheet" href="css/crew-ai-styles.css">
+    <link rel="stylesheet" href="css/modular-llm-styles.css">
     
     <!-- VLibras Accessibility -->
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
@@ -53,6 +54,9 @@
                 </div>
                 
                 <div class="header-controls">
+                    <!-- System Status Indicator -->
+                    <div id="system-status" class="system-status unknown" title="Status do sistema">🔄</div>
+                    
                     <button id="settings-btn" class="icon-btn" title="Configurações" aria-label="Abrir configurações">
                         ⚙️
                     </button>
@@ -65,6 +69,21 @@
 
         <!-- Main Content -->
         <main class="main-content">
+            <!-- LLM System Panel -->
+            <div id="llm-system-panel" class="llm-system-panel">
+                <div id="processing-indicator" class="processing-indicator" style="display: none;">
+                    <!-- Processing animation will be inserted here -->
+                </div>
+                
+                <div id="provider-status-panel" class="provider-status-panel">
+                    <!-- Provider status will be inserted here -->
+                </div>
+                
+                <div id="metrics-panel" class="metrics-panel">
+                    <!-- System metrics will be inserted here -->
+                </div>
+            </div>
+
             <!-- Chat Container -->
             <div class="chat-container">
                 <div id="chat-messages" class="chat-messages" role="log" aria-live="polite" aria-label="Mensagens do chat">
@@ -188,11 +207,16 @@
 
     <!-- Scripts -->
     <!-- Primeiro, os módulos principais e sem dependências -->
+    <script src="js/darcy-config-modular.js"></script>
     <script src="js/config.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/storage.js"></script>
     <script src="js/ui-manager.js"></script>
     <script src="js/avatar-system.js"></script>
+
+    <!-- Módulos do sistema modular LLM -->
+    <script src="js/modular-llm-service.js"></script>
+    <script src="js/python-integration.js"></script>
 
     <!-- Módulos que dependem dos principais -->
     <script src="js/llm-providers.js"></script>

@@ -28,3 +28,10 @@ desktop.ini
 # Temporários
 *.tmp
 *.temp
+
+# Python
+/python/.venv
+/python/__pycache__/
+python/*.pyc
+/python/*.pyo
+/python/*.pyd
