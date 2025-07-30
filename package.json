@@ -2,13 +2,10 @@
   "name": "darcy-ai",
   "version": "2.1.0",
   "description": "Darcy AI - Sistema de Tutoria Modular com Múltiplas LLMs Gratuitas",
-  "main": "index.html",
+  "main": "backend/server.js",
   "scripts": {
     "start": "node backend/server.js",
-    "dev": "cd backend && npm start", 
-    "build": "echo 'Build completed'",
-    "vercel-build": "cd backend && npm install",
-    "test": "echo 'Tests passed'"
+    "build": "echo 'Build completed'"
   },
   "dependencies": {
     "express": "^4.18.2",

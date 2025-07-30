@@ -1,63 +1,10 @@
 {
   "version": 2,
   "name": "darcy-ai",
-  "description": "Darcy AI - Tutor Educacional com IA",
-  "builds": [
-    {
-      "src": "backend/server.js",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": ["backend/**"]
-      }
-    }
-  ],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "/backend/server.js",
-      "headers": {
-        "Cache-Control": "no-cache"
-      }
-    },
-    {
-      "src": "/(.*)\\.(js|css|html|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot)$",
-      "dest": "/$1",
-      "headers": {
-        "Cache-Control": "public, max-age=31536000, immutable"
-      }
-    },
-    {
       "src": "/(.*)",
-      "dest": "/index.html"
-    }
-  ],
-  "env": {
-    "NODE_ENV": "production",
-    "PORT": "3000"
-  },
-  "functions": {
-    "backend/server.js": {
-      "maxDuration": 30,
-      "memory": 512
-    }
-  },
-  "headers": [
-    {
-      "source": "/api/(.*)",
-      "headers": [
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "*"
-        },
-        {
-          "key": "Access-Control-Allow-Methods",
-          "value": "GET, POST, PUT, DELETE, OPTIONS"
-        },
-        {
-          "key": "Access-Control-Allow-Headers",
-          "value": "Content-Type, Authorization"
-        }
-      ]
+      "dest": "/$1"
     }
   ]
 }

@@ -1,235 +1,332 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Darcy AI - Tutor Educacional Open Source</title>
-    
-    <!-- PWA Meta Tags -->
-    <meta name="description" content="Tutor de IA educacional open source especializado em educação musical">
-    <meta name="theme-color" content="#1e3a8a">
-    <link rel="manifest" href="manifest.json">
-    
-    <!-- Preload Critical Resources -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Styles -->
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="css/avatar-multimodal.css">
-    <link rel="stylesheet" href="css/crew-ai-styles.css">
-    <link rel="stylesheet" href="css/modular-llm-styles.css">
-    
-    <!-- VLibras Accessibility -->
-    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <title>Darcy AI - Tutor Educacional</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            max-width: 800px;
+            width: 90%;
+            margin: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .title {
+            color: #2d3748;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: #718096;
+            font-size: 1.1rem;
+        }
+
+        .crew-selection {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .crew-card {
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .crew-card:hover, .crew-card.active {
+            border-color: #667eea;
+            background: #f7fafc;
+        }
+
+        .crew-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .crew-name {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 0.25rem;
+        }
+
+        .crew-desc {
+            font-size: 0.85rem;
+            color: #718096;
+        }
+
+        .chat-area {
+            background: #f7fafc;
+            border-radius: 12px;
+            padding: 1rem;
+            min-height: 300px;
+            margin-bottom: 1rem;
+            overflow-y: auto;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+        }
+
+        .message.user {
+            background: #667eea;
+            color: white;
+            margin-left: 2rem;
+        }
+
+        .message.ai {
+            background: white;
+            border: 1px solid #e2e8f0;
+            margin-right: 2rem;
+        }
+
+        .input-area {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .message-input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .send-button {
+            padding: 0.75rem 1.5rem;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .send-button:hover {
+            background: #5a67d8;
+        }
+
+        .send-button:disabled {
+            background: #a0aec0;
+            cursor: not-allowed;
+        }
+
+        .status {
+            text-align: center;
+            padding: 1rem;
+            color: #718096;
+            font-size: 0.9rem;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
-    <!-- VLibras Widget -->
-    <div vw class="enabled">
-        <div vw-access-button class="active"></div>
-        <div vw-plugin-wrapper>
-            <div class="vw-plugin-top-wrapper"></div>
+    <div class="container">
+        <div class="header">
+            <div class="logo">🎓</div>
+            <div class="title">Darcy AI</div>
+            <div class="subtitle">Seu Tutor Educacional Inteligente</div>
+        </div>
+
+        <div class="crew-selection">
+            <div class="crew-card active" data-crew="teaching">
+                <div class="crew-icon">👨‍🏫</div>
+                <div class="crew-name">Ensino</div>
+                <div class="crew-desc">Explicações didáticas</div>
+            </div>
+            <div class="crew-card" data-crew="research">
+                <div class="crew-icon">🔍</div>
+                <div class="crew-name">Pesquisa</div>
+                <div class="crew-desc">Análise acadêmica</div>
+            </div>
+            <div class="crew-card" data-crew="creative">
+                <div class="crew-icon">🎨</div>
+                <div class="crew-name">Criativa</div>
+                <div class="crew-desc">Projetos inovadores</div>
+            </div>
+            <div class="crew-card" data-crew="assessment">
+                <div class="crew-icon">📋</div>
+                <div class="crew-name">Avaliação</div>
+                <div class="crew-desc">Testes e exercícios</div>
+            </div>
+        </div>
+
+        <div class="chat-area" id="chatArea">
+            <div class="message ai">
+                <strong>Darcy AI:</strong> Olá! Sou seu tutor educacional. Selecione uma equipe acima e me faça uma pergunta sobre qualquer assunto que você gostaria de aprender!
+            </div>
+        </div>
+
+        <div class="input-area">
+            <input type="text" class="message-input" id="messageInput" placeholder="Digite sua pergunta educacional...">
+            <button class="send-button" id="sendButton">Enviar</button>
+        </div>
+
+        <div class="status" id="status">
+            ✅ Darcy AI está online e funcionando!
         </div>
     </div>
 
-    <!-- Loading Screen -->
-    <div id="loading-screen" class="loading-screen">
-        <div class="loading-spinner"></div>
-        <p>Carregando Darcy AI...</p>
-    </div>
+    <script>
+        let currentCrew = 'teaching';
+        let isLoading = false;
 
-    <!-- Main App Container -->
-    <div id="app" class="app-container" style="display: none;">
-        <!-- Header -->
-        <header class="header">
-            <div class="header-content">
-                <div class="logo-section">
-                    <div class="logo">🎓</div>
-                    <div class="title-section">
-                        <h1>Darcy AI</h1>
-                        <p class="subtitle">Tutor Educacional Open Source</p>
-                    </div>
-                </div>
+        // Crew selection
+        document.querySelectorAll('.crew-card').forEach(card => {
+            card.addEventListener('click', () => {
+                document.querySelectorAll('.crew-card').forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+                currentCrew = card.dataset.crew;
                 
-                <div class="header-controls">
-                    <!-- System Status Indicator -->
-                    <div id="system-status" class="system-status unknown" title="Status do sistema">🔄</div>
-                    
-                    <button id="settings-btn" class="icon-btn" title="Configurações" aria-label="Abrir configurações">
-                        ⚙️
-                    </button>
-                    <button id="theme-toggle" class="icon-btn" title="Alternar tema" aria-label="Alternar entre tema claro e escuro">
-                        🌙
-                    </button>
-                </div>
-            </div>
-        </header>
-
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- LLM System Panel -->
-            <div id="llm-system-panel" class="llm-system-panel">
-                <div id="processing-indicator" class="processing-indicator" style="display: none;">
-                    <!-- Processing animation will be inserted here -->
-                </div>
+                const crewNames = {
+                    teaching: 'Equipe de Ensino',
+                    research: 'Equipe de Pesquisa', 
+                    creative: 'Equipe Criativa',
+                    assessment: 'Equipe de Avaliação'
+                };
                 
-                <div id="provider-status-panel" class="provider-status-panel">
-                    <!-- Provider status will be inserted here -->
-                </div>
+                addMessage(`Equipe ${crewNames[currentCrew]} selecionada! Como posso ajudar?`, 'ai');
+            });
+        });
+
+        // Send message
+        document.getElementById('sendButton').addEventListener('click', sendMessage);
+        document.getElementById('messageInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+
+        async function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            
+            if (!message || isLoading) return;
+            
+            addMessage(message, 'user');
+            input.value = '';
+            
+            setLoading(true);
+            
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message, crew: currentCrew })
+                });
                 
-                <div id="metrics-panel" class="metrics-panel">
-                    <!-- System metrics will be inserted here -->
-                </div>
-            </div>
-
-            <!-- Chat Container -->
-            <div class="chat-container">
-                <div id="chat-messages" class="chat-messages" role="log" aria-live="polite" aria-label="Mensagens do chat">
-                    <!-- Messages will be dynamically added here -->
-                </div>
+                const data = await response.json();
                 
-                <!-- Typing Indicator -->
-                <div id="typing-indicator" class="typing-indicator" style="display: none;">
-                    <div class="message-avatar">🎓</div>
-                    <div class="typing-animation">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                </div>
-            </div>
+                if (data.response) {
+                    addMessage(data.response, 'ai');
+                    updateStatus(`Respondido por ${data.metadata?.provider || 'Darcy AI'}`);
+                } else {
+                    addMessage('Desculpe, houve um erro. Tente novamente.', 'ai');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                addMessage('Erro de conexão. Verificando status da API...', 'ai');
+                checkHealth();
+            }
+            
+            setLoading(false);
+        }
 
-            <!-- Input Area -->
-            <div class="input-area">
-                <div class="input-container">
-                    <div class="input-wrapper">
-                        <textarea 
-                            id="user-input" 
-                            class="user-input" 
-                            placeholder="Digite sua mensagem..." 
-                            rows="1"
-                            aria-label="Campo de entrada de mensagem"
-                            maxlength="2000"
-                        ></textarea>
-                        
-                        <div class="input-actions">
-                            <button id="file-btn" class="action-btn" title="Anexar arquivo" aria-label="Anexar arquivo">
-                                📎
-                            </button>
-                            <button id="voice-btn" class="action-btn" title="Gravação de voz" aria-label="Iniciar gravação de voz">
-                                🎤
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <button id="send-btn" class="send-btn" title="Enviar mensagem" aria-label="Enviar mensagem">
-                        <span class="send-icon">➤</span>
-                    </button>
-                </div>
-                
-                <!-- Quick Actions -->
-                <div class="quick-actions">
-                    <button class="quick-action" data-action="web-search">🔍 Buscar na Web</button>
-                    <button class="quick-action" data-action="explain">💡 Explicar Conceito</button>
-                    <button class="quick-action" data-action="practice">🎯 Exercícios</button>
-                    <button class="quick-action" data-action="summarize">📋 Resumir</button>
-                </div>
-                
-                <!-- File Input (Hidden) -->
-                <input type="file" id="file-input" multiple accept=".pdf,.doc,.docx,.txt,.md,.mp3,.wav,.mp4,.jpg,.jpeg,.png" style="display: none;">
-            </div>
-        </main>
+        function addMessage(text, sender) {
+            const chatArea = document.getElementById('chatArea');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            
+            if (sender === 'ai') {
+                messageDiv.innerHTML = `<strong>Darcy AI:</strong> ${text}`;
+            } else {
+                messageDiv.innerHTML = `<strong>Você:</strong> ${text}`;
+            }
+            
+            chatArea.appendChild(messageDiv);
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
 
-        <!-- Settings Modal -->
-        <div id="settings-modal" class="modal" style="display: none;">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2>Configurações</h2>
-                    <button id="close-settings" class="close-btn">&times;</button>
-                </div>
-                
-                <div class="modal-body">
-                    <div class="setting-group">
-                        <label for="llm-provider">Provedor de IA:</label>
-                        <select id="llm-provider">
-                            <option value="ollama">Ollama (Local)</option>
-                            <option value="openai">OpenAI</option>
-                            <option value="anthropic">Anthropic</option>
-                            <option value="cohere">Cohere</option>
-                        </select>
-                    </div>
-                    
-                    <div class="setting-group">
-                        <label for="api-key">Chave da API:</label>
-                        <input type="password" id="api-key" placeholder="Cole sua chave da API aqui">
-                    </div>
-                    
-                    <div class="setting-group">
-                        <label for="model-select">Modelo:</label>
-                        <select id="model-select">
-                            <option value="llama2">Llama 2 (Local)</option>
-                        </select>
-                    </div>
-                    
-                    <div class="setting-group">
-                        <label>
-                            <input type="checkbox" id="voice-responses"> 
-                            Respostas por voz
-                        </label>
-                    </div>
-                    
-                    <div class="setting-group">
-                        <label>
-                            <input type="checkbox" id="save-history" checked> 
-                            Salvar histórico de conversas
-                        </label>
-                    </div>
-                </div>
-                
-                <div class="modal-footer">
-                    <button id="save-settings" class="btn-primary">Salvar</button>
-                    <button id="reset-settings" class="btn-secondary">Resetar</button>
-                </div>
-            </div>
-        </div>
-    </div>
+        function setLoading(loading) {
+            isLoading = loading;
+            const button = document.getElementById('sendButton');
+            const status = document.getElementById('status');
+            
+            if (loading) {
+                button.disabled = true;
+                button.innerHTML = '<div class="loading"></div>';
+                status.innerHTML = '🤖 Darcy está pensando...';
+            } else {
+                button.disabled = false;
+                button.innerHTML = 'Enviar';
+            }
+        }
 
-    <!-- Footer -->
-    <footer class="footer">
-        <p>
-            <strong>Darcy AI</strong> - Projeto Open Source | 
-            <a href="https://github.com/seu-usuario/darcy-ai" target="_blank" rel="noopener">GitHub</a> | 
-            <a href="#" id="about-link">Sobre</a>
-        </p>
-    </footer>
+        function updateStatus(message) {
+            document.getElementById('status').innerHTML = `✅ ${message}`;
+        }
 
-    <!-- Scripts -->
-    <!-- Primeiro, os módulos principais e sem dependências -->
-    <script src="js/darcy-config-modular.js"></script>
-    <script src="js/config.js"></script>
-    <script src="js/utils.js"></script>
-    <script src="js/storage.js"></script>
-    <script src="js/ui-manager.js"></script>
-    <script src="js/avatar-system.js"></script>
+        async function checkHealth() {
+            try {
+                const response = await fetch('/api/health');
+                const data = await response.json();
+                updateStatus(`Sistema saudável - ${data.version}`);
+            } catch (error) {
+                updateStatus('❌ Erro de conecton com a API');
+            }
+        }
 
-    <!-- Módulos do sistema modular LLM -->
-    <script src="js/modular-llm-service.js"></script>
-    <script src="js/python-integration.js"></script>
-
-    <!-- Módulos que dependem dos principais -->
-    <script src="js/llm-providers.js"></script>
-    <script src="js/settings-panel.js"></script>
-    <script src="js/chat-interface.js"></script>
-    <script src="js/file-handler.js"></script>
-    
-    <!-- Módulos avançados que dependem dos anteriores -->
-    <script src="js/multimodal-system.js"></script>
-    <script src="js/crew-ai-integration.js"></script>
-    <script src="js/crew-ai-chat-interface.js"></script>
-
-    <!-- Finalmente, o script principal que inicializa tudo -->
-    <script src="script.js"></script>
+        // Initialize
+        checkHealth();
+    </script>
 </body>
 </html>
