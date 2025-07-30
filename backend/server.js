@@ -11,7 +11,14 @@ const port = process.env.PORT || 3000;
 
 // --- Middleware ---
 app.use(cors({
-    origin: ['http://localhost:8000', 'https://darcy-ai-seven.vercel.app', 'https://darcy-ai-*.vercel.app'],
+    origin: [
+        'http://localhost:8000', 
+        'http://localhost:3000',
+        'https://darcy-ai-seven.vercel.app', 
+        'https://darcy-ai.vercel.app',
+        'https://darcy-ai-git-main-subazes-projects.vercel.app',
+        /^https:\/\/darcy-ai.*\.vercel\.app$/
+    ],
     credentials: true
 }));
 app.use(express.json({ limit: '10mb' }));

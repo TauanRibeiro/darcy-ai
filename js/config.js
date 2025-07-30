@@ -2,7 +2,7 @@
 const CONFIG = {
     // App Information
     APP_NAME: 'Darcy AI',
-    VERSION: '2.0.0',
+    VERSION: '2.1.0',
     DESCRIPTION: 'Tutor Educacional Open Source',
     
     // Backend Configuration - Detecção automática de ambiente
@@ -15,7 +15,12 @@ const CONFIG = {
             return 'http://localhost:3000';
         }
         
-        // Ambiente de produção no Vercel
+        // Ambiente de produção no Vercel - URL específica do deploy
+        if (hostname === 'darcy-ai-git-main-subazes-projects.vercel.app') {
+            return `${protocol}//${hostname}`;
+        }
+        
+        // Ambiente de produção no Vercel (genérico)
         if (hostname.includes('vercel.app')) {
             return `${protocol}//${hostname}`;
         }
