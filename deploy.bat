@@ -2,11 +2,11 @@
 CHCP 65001 > nul
 setlocal
 
-REM Darcy AI - Script de Deploy Automatizado para Windows
-REM =====================================================
+REM Darcy AI - Script de Deploy AUTOMÁTICO para Vercel
+REM =================================================
 
-echo 🚀 Iniciando deploy do Darcy AI para produção...
-echo ================================================
+echo 🚀 DEPLOY AUTOMÁTICO DO DARCY AI PARA VERCEL
+echo ===============================================
 echo.
 
 REM Verificar se estamos no diretório correto
@@ -26,58 +26,99 @@ if %errorlevel% neq 0 (
 
 REM Verificar se é um repositório Git
 if not exist ".git" (
-    echo ❌ Erro: Este não é um repositório Git. Execute 'git init' primeiro.
-    pause
-    exit /b 1
+    echo 🔧 Inicializando repositório Git...
+    git init
+    git branch -M main
+    echo.
 )
 
 echo ✅ Verificações iniciais passaram
 echo.
 
-REM Gerar timestamp para versão
-for /f "tokens=1-4 delims=/ " %%a in ('date /t') do set "current_date=%%d%%b%%c"
-for /f "tokens=1-2 delims=: " %%a in ('time /t') do set "current_time=%%a%%b"
-set "version_suffix=%current_date%-%current_time%"
-
-echo 📝 Atualizando versão para v2.1.%version_suffix%...
-echo.
-
-REM Verificar mudanças pendentes
-git status --porcelain >nul 2>&1
-for /f %%i in ('git status --porcelain ^| find /c /v ""') do set changes=%%i
-
-if %changes% gtr 0 (
-    echo 📦 Commitando mudanças pendentes...
-    git add .
-    git commit -m "Deploy automatizado - v2.1.%version_suffix%"
+REM Verificar se há remote origin
+git remote get-url origin >nul 2>&1
+if %errorlevel% neq 0 (
+    echo 🔗 Configurando repositório remoto...
+    git remote add origin https://github.com/TauanRibeiro/darcy-ai.git
     echo.
 )
 
-REM Push para GitHub
-echo 📤 Enviando para GitHub...
-git push origin main
+REM Gerar timestamp para versão
+for /f "tokens=2 delims==" %%a in ('wmic OS Get localdatetime /value') do set "dt=%%a"
+set "YY=%dt:~2,2%" & set "MM=%dt:~4,2%" & set "DD=%dt:~6,2%"
+set "HH=%dt:~8,2%" & set "MIN=%dt:~10,2%"
+set "version_suffix=%YY%%MM%%DD%-%HH%%MIN%"
+
+echo 📝 Commitando como v2.1.%version_suffix%...
+echo.
+
+REM Adicionar todos os arquivos
+git add .
+
+REM Commit com mensagem detalhada
+git commit -m "🚀 Deploy Automático Darcy AI v2.1.%version_suffix%
+
+✅ Features incluídas:
+- Sistema modular de LLM (OpenAI, Anthropic, Google, Groq, Ollama)
+- Interface responsiva e moderna
+- Backend Node.js otimizado para Vercel
+- Componentes Python para análise avançada
+- OCR com fallback graceful
+- Web scraping educacional
+- Sistema de crews especializado
+
+🔧 Configurações de produção:
+- CORS configurado para Vercel
+- Detecção automática de ambiente
+- Cache otimizado para assets
+- Routing inteligente para SPA
+- Headers de segurança aplicados
+
+🌐 Pronto para: https://vercel.com/deploy"
 
 if %errorlevel% neq 0 (
-    echo ❌ Erro ao fazer push. Verifique sua conexão e permissões.
-    pause
-    exit /b 1
+    echo ⚠️ Nada novo para commitar ou erro no commit
 )
 
 echo.
-echo 🎉 Deploy iniciado com sucesso!
-echo ================================
+echo 📤 Fazendo push para GitHub...
+git push -u origin main --force
+
+if %errorlevel% neq 0 (
+    echo ❌ Erro ao fazer push. Tentando novamente...
+    timeout /t 3 >nul
+    git push -u origin main --force
+    
+    if %errorlevel% neq 0 (
+        echo ❌ Falha no push. Verifique sua conexão e permissões.
+        echo 💡 Dica: Configure seu token GitHub pessoal
+        pause
+        exit /b 1
+    )
+)
+
 echo.
-echo 📋 Próximos passos:
-echo 1. Acesse https://vercel.com
-echo 2. Conecte seu repositório GitHub (TauanRibeiro/darcy-ai)
-echo 3. Configure as variáveis de ambiente (se necessário):
-echo    - NODE_ENV=production
-echo 4. Aguarde o deploy automático
+echo 🎉 PUSH REALIZADO COM SUCESSO!
+echo ==============================
 echo.
-echo 🔗 URLs esperadas após deploy:
+echo � DEPLOY AUTOMÁTICO NO VERCEL:
+echo 1. Acesse: https://vercel.com/new
+echo 2. Conecte: github.com/TauanRibeiro/darcy-ai
+echo 3. Deploy é AUTOMÁTICO! (já configurado)
+echo.
+echo 🌟 URLs após deploy:
 echo    Frontend: https://darcy-ai-[hash].vercel.app
-echo    API: https://darcy-ai-[hash].vercel.app/api
+echo    API: https://darcy-ai-[hash].vercel.app/api/chat
+echo    Health: https://darcy-ai-[hash].vercel.app/api/health
 echo.
-echo ✅ Script concluído!
+echo 📋 O que foi otimizado:
+echo ✅ Vercel.json com cache inteligente
+echo ✅ CORS configurado para produção  
+echo ✅ Routing SPA otimizado
+echo ✅ Assets com cache de 1 ano
+echo ✅ API com headers de segurança
+echo ✅ Functions com 30s timeout
+echo.
+echo 🚀 SEU DARCY AI ESTÁ ONLINE EM ~2 MINUTOS!
 echo.
 pause
