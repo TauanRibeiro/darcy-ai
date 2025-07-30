@@ -300,10 +300,9 @@ class DarcyFileProcessor:
             return {"error": f"Erro ao processar PDF: {e}"}
     
     async def process_image(self, file_path: str) -> Dict:
-        """Processa imagens com OCR e análise"""
+        """Processa imagens com OCR e análise (resiliente à ausência do Tesseract)"""
         try:
             from PIL import Image
-            import pytesseract
             
             result = {
                 "type": "image",
@@ -320,27 +319,50 @@ class DarcyFileProcessor:
                     "format": img.format
                 }
                 
-                # OCR para extrair texto
+                # Tentar OCR se disponível
                 try:
-                    text = pytesseract.image_to_string(img, lang='por+eng')
-                    result["text"] = text.strip()
-                except Exception as e:
-                    result["ocr_error"] = str(e)
+                    import pytesseract
+                    # Verificar se o executável do Tesseract está disponível
+                    try:
+                        text = pytesseract.image_to_string(img, lang='por+eng')
+                        result["text"] = text.strip()
+                        result["ocr_available"] = True
+                    except pytesseract.TesseractNotFoundError:
+                        result["text"] = ""
+                        result["ocr_available"] = False
+                        result["ocr_message"] = "OCR não disponível: Tesseract não encontrado no servidor"
+                        logger.warning("Tesseract OCR não disponível - continuando sem OCR")
+                    except Exception as e:
+                        result["text"] = ""
+                        result["ocr_error"] = str(e)
+                        result["ocr_available"] = False
+                        logger.warning(f"Erro no OCR: {e}")
+                        
+                except ImportError:
+                    result["text"] = ""
+                    result["ocr_available"] = False
+                    result["ocr_message"] = "OCR não disponível: biblioteca pytesseract não instalada"
+                    logger.warning("pytesseract não disponível - continuando sem OCR")
                 
-                # Análise básica da imagem
+                # Análise básica da imagem (sempre disponível)
                 result["analysis"] = {
                     "has_text": len(result["text"]) > 10,
-                    "likely_educational": self.is_educational_image(result["text"]),
+                    "likely_educational": self.is_educational_image(result["text"]) if result["text"] else False,
                     "color_mode": img.mode,
-                    "dimensions": img.size
+                    "dimensions": img.size,
+                    "file_size_bytes": os.path.getsize(file_path) if os.path.exists(file_path) else 0
                 }
             
             return result
             
         except ImportError:
-            return {"error": "Bibliotecas de imagem não instaladas (pip install Pillow pytesseract)"}
+            return {
+                "error": "Biblioteca de processamento de imagem não instalada", 
+                "suggestion": "pip install Pillow",
+                "ocr_available": False
+            }
         except Exception as e:
-            return {"error": f"Erro ao processar imagem: {e}"}
+            return {"error": f"Erro ao processar imagem: {e}", "ocr_available": False}
     
     def analyze_educational_content(self, text: str) -> Dict:
         """Analisa conteúdo educacional em texto"""

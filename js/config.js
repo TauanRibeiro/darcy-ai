@@ -5,10 +5,29 @@ const CONFIG = {
     VERSION: '2.0.0',
     DESCRIPTION: 'Tutor Educacional Open Source',
     
-    // Backend Configuration
-    BACKEND_URL: window.location.hostname === 'localhost' 
-        ? 'http://localhost:3001' 
-        : 'https://api.darcy-ai.com', // Substitua pela sua URL de produção
+    // Backend Configuration - Detecção automática de ambiente
+    BACKEND_URL: (() => {
+        const hostname = window.location.hostname;
+        const protocol = window.location.protocol;
+        
+        // Ambiente local (desenvolvimento)
+        if (hostname === 'localhost' || hostname === '127.0.0.1') {
+            return 'http://localhost:3000';
+        }
+        
+        // Ambiente de produção no Vercel
+        if (hostname.includes('vercel.app')) {
+            return `${protocol}//${hostname}`;
+        }
+        
+        // Ambiente de produção personalizado
+        if (hostname.includes('darcy-ai')) {
+            return `${protocol}//${hostname}`;
+        }
+        
+        // Fallback para desenvolvimento
+        return 'http://localhost:3000';
+    })(),
     
     // API Endpoints (Backend)
     ENDPOINTS: {
