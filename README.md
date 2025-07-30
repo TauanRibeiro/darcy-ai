@@ -1,6 +1,6 @@
 # 🤖 Darcy AI - Tutor Educacional com CrewAI
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/seu-usuario/darcy-ai)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/TauanRibeiro/darcy-ai)
 [![Status](https://img.shields.io/badge/Status-Production%20Ready-green)](https://github.com)
 [![Version](https://img.shields.io/badge/Version-2.1.0-blue)](https://github.com)
 [![License](https://img.shields.io/badge/License-MIT-yellow)](https://github.com)
@@ -48,7 +48,7 @@
 #### Passos
 ```bash
 # 1. Clone o repositório
-git clone https://github.com/seu-usuario/darcy-ai.git
+git clone https://github.com/TauanRibeiro/darcy-ai.git
 cd darcy-ai
 
 # 2. Instale as dependências do backend
@@ -231,8 +231,8 @@ Este projeto está licenciado sob a **MIT License** - veja o arquivo [LICENSE](L
 
 ## 🆘 Suporte
 
-- **Issues**: [GitHub Issues](https://github.com/seu-usuario/darcy-ai/issues)
-- **Discussões**: [GitHub Discussions](https://github.com/seu-usuario/darcy-ai/discussions)
+- **Issues**: [GitHub Issues](https://github.com/TauanRibeiro/darcy-ai/issues)
+- **Discussões**: [GitHub Discussions](https://github.com/TauanRibeiro/darcy-ai/discussions)
 - **Email**: darcy.ai@unb.br
 - **Discord**: [Servidor da Comunidade](https://discord.gg/darcy-ai)
 
