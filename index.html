@@ -3,8 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Darcy AI - Tutor Educacional</title>
+    <title>Darcy AI - Tutor Educacional Futurista</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            --secondary-gradient: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+            --accent-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --dark-gradient: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.8);
+            --shadow-glow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --shadow-card: 0 8px 32px rgba(31, 38, 135, 0.37);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,209 +26,518 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--primary-gradient);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Floating Background Elements */
+        .bg-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape-1 {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            width: 120px;
+            height: 120px;
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .shape-3 {
+            width: 60px;
+            height: 60px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        .shape-4 {
+            width: 100px;
+            height: 100px;
+            top: 10%;
+            right: 30%;
+            animation-delay: 1s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(120deg); }
+            66% { transform: translateY(20px) rotate(240deg); }
         }
 
         .container {
-            background: white;
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            max-width: 800px;
-            width: 90%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-card);
+            max-width: 900px;
+            width: 95%;
             margin: 2rem;
+            position: relative;
+            z-index: 1;
+            animation: slideInUp 0.8s ease-out;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
+            position: relative;
         }
 
         .logo {
-            font-size: 4rem;
+            font-size: 5rem;
             margin-bottom: 1rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .title {
-            color: #2d3748;
-            font-size: 2rem;
-            font-weight: bold;
+            color: var(--text-primary);
+            font-size: 2.5rem;
+            font-weight: 800;
             margin-bottom: 0.5rem;
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
         .subtitle {
-            color: #718096;
-            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 50px;
+            color: #22c55e;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #22c55e;
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
         }
 
         .crew-selection {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
         }
 
         .crew-card {
-            padding: 1rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
+            padding: 1.5rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        .crew-card:hover, .crew-card.active {
-            border-color: #667eea;
-            background: #f7fafc;
+        .crew-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .crew-card:hover::before {
+            left: 100%;
+        }
+
+        .crew-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: var(--shadow-glow);
+            border-color: rgba(255,255,255,0.4);
+        }
+
+        .crew-card.active {
+            background: var(--secondary-gradient);
+            border-color: rgba(255,255,255,0.6);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .crew-card.active .crew-name,
+        .crew-card.active .crew-desc {
+            color: white;
         }
 
         .crew-icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
         }
 
         .crew-name {
-            font-weight: 600;
-            color: #2d3748;
-            margin-bottom: 0.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
         }
 
         .crew-desc {
-            font-size: 0.85rem;
-            color: #718096;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 400;
         }
 
         .chat-area {
-            background: #f7fafc;
-            border-radius: 12px;
-            padding: 1rem;
-            min-height: 300px;
-            margin-bottom: 1rem;
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 1.5rem;
+            min-height: 350px;
+            max-height: 450px;
+            margin-bottom: 1.5rem;
             overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+
+        .chat-area::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-area::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .chat-area::-webkit-scrollbar-thumb {
+            background: var(--secondary-gradient);
+            border-radius: 10px;
         }
 
         .message {
-            margin-bottom: 1rem;
-            padding: 0.75rem;
-            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            padding: 1rem 1.5rem;
+            border-radius: 18px;
+            position: relative;
+            animation: messageSlide 0.5s ease-out;
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes messageSlide {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .message.user {
-            background: #667eea;
+            background: var(--secondary-gradient);
             color: white;
             margin-left: 2rem;
+            border-bottom-right-radius: 5px;
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
         }
 
         .message.ai {
-            background: white;
-            border: 1px solid #e2e8f0;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-primary);
             margin-right: 2rem;
+            border-bottom-left-radius: 5px;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
         }
 
         .input-area {
             display: flex;
-            gap: 0.5rem;
+            gap: 1rem;
+            align-items: center;
         }
 
         .message-input {
             flex: 1;
-            padding: 0.75rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
             font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 400;
+            transition: all 0.3s ease;
+        }
+
+        .message-input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .message-input:focus {
+            outline: none;
+            border-color: rgba(79, 172, 254, 0.6);
+            box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.2);
+            background: rgba(255, 255, 255, 0.15);
         }
 
         .send-button {
-            padding: 0.75rem 1.5rem;
-            background: #667eea;
+            padding: 1rem 2rem;
+            background: var(--secondary-gradient);
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 25px;
             cursor: pointer;
             font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .send-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.5s;
+        }
+
+        .send-button:hover::before {
+            left: 100%;
         }
 
         .send-button:hover {
-            background: #5a67d8;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
         }
 
         .send-button:disabled {
-            background: #a0aec0;
+            background: rgba(255, 255, 255, 0.2);
             cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
 
         .status {
             text-align: center;
             padding: 1rem;
-            color: #718096;
-            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 400;
         }
 
         .loading {
             display: inline-block;
             width: 20px;
             height: 20px;
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #667eea;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid #ffffff;
             border-radius: 50%;
             animation: spin 1s linear infinite;
+        }
+
+        .ai-thinking {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .thinking-dots {
+            display: flex;
+            gap: 2px;
+        }
+
+        .thinking-dot {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--text-secondary);
+            animation: thinking 1.4s ease-in-out infinite;
+        }
+
+        .thinking-dot:nth-child(1) { animation-delay: 0s; }
+        .thinking-dot:nth-child(2) { animation-delay: 0.2s; }
+        .thinking-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes thinking {
+            0%, 80%, 100% { transform: scale(0); opacity: 0.5; }
+            40% { transform: scale(1); opacity: 1; }
         }
 
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+            
+            .logo {
+                font-size: 4rem;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+            
+            .crew-selection {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            
+            .crew-card {
+                padding: 1rem;
+            }
+            
+            .message.user {
+                margin-left: 1rem;
+            }
+            
+            .message.ai {
+                margin-right: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Floating Background Elements -->
+    <div class="bg-shapes">
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+        <div class="floating-shape shape-3"></div>
+        <div class="floating-shape shape-4"></div>
+    </div>
+
     <div class="container">
         <div class="header">
-            <div class="logo">🎓</div>
+            <div class="logo">🤖</div>
             <div class="title">Darcy AI</div>
-            <div class="subtitle">Seu Tutor Educacional Inteligente</div>
+            <div class="subtitle">Seu Tutor Educacional Futurista</div>
+            <div class="status-indicator">
+                <div class="status-dot"></div>
+                Sistema Neural Ativo
+            </div>
         </div>
 
         <div class="crew-selection">
             <div class="crew-card active" data-crew="teaching">
-                <div class="crew-icon">👨‍🏫</div>
-                <div class="crew-name">Ensino</div>
-                <div class="crew-desc">Explicações didáticas</div>
+                <div class="crew-icon">👨‍�</div>
+                <div class="crew-name">Neural Teaching</div>
+                <div class="crew-desc">Explanações Inteligentes</div>
             </div>
             <div class="crew-card" data-crew="research">
-                <div class="crew-icon">🔍</div>
-                <div class="crew-name">Pesquisa</div>
-                <div class="crew-desc">Análise acadêmica</div>
+                <div class="crew-icon">�</div>
+                <div class="crew-name">Deep Research</div>
+                <div class="crew-desc">Análise Avançada</div>
             </div>
             <div class="crew-card" data-crew="creative">
-                <div class="crew-icon">🎨</div>
-                <div class="crew-name">Criativa</div>
-                <div class="crew-desc">Projetos inovadores</div>
+                <div class="crew-icon">🚀</div>
+                <div class="crew-name">Creative AI</div>
+                <div class="crew-desc">Inovação Futurista</div>
             </div>
             <div class="crew-card" data-crew="assessment">
-                <div class="crew-icon">📋</div>
-                <div class="crew-name">Avaliação</div>
-                <div class="crew-desc">Testes e exercícios</div>
+                <div class="crew-icon">⚡</div>
+                <div class="crew-name">Smart Assessment</div>
+                <div class="crew-desc">Avaliação Inteligente</div>
             </div>
         </div>
 
         <div class="chat-area" id="chatArea">
             <div class="message ai">
-                <strong>Darcy AI:</strong> Olá! Sou seu tutor educacional. Selecione uma equipe acima e me faça uma pergunta sobre qualquer assunto que você gostaria de aprender!
+                <strong>🤖 Darcy AI Neural:</strong> Bem-vindo ao futuro da educação! Sou seu tutor com inteligência artificial avançada. Selecione um módulo neural acima e vamos começar sua jornada de aprendizado futurista! ✨
             </div>
         </div>
 
         <div class="input-area">
-            <input type="text" class="message-input" id="messageInput" placeholder="Digite sua pergunta educacional...">
-            <button class="send-button" id="sendButton">Enviar</button>
+            <input type="text" class="message-input" id="messageInput" placeholder="Digite sua pergunta para a IA...">
+            <button class="send-button" id="sendButton">
+                <span id="buttonText">Enviar</span>
+            </button>
         </div>
 
         <div class="status" id="status">
-            ✅ Darcy AI está online e funcionando!
+            🧠 Sistema Neural inicializando...
         </div>
     </div>
 
@@ -222,29 +545,45 @@
         let currentCrew = 'teaching';
         let isLoading = false;
 
-        // Crew selection
+        // Crew selection with enhanced animations
         document.querySelectorAll('.crew-card').forEach(card => {
             card.addEventListener('click', () => {
+                // Remove active from all cards
                 document.querySelectorAll('.crew-card').forEach(c => c.classList.remove('active'));
+                
+                // Add active to clicked card with animation
                 card.classList.add('active');
                 currentCrew = card.dataset.crew;
                 
                 const crewNames = {
-                    teaching: 'Equipe de Ensino',
-                    research: 'Equipe de Pesquisa', 
-                    creative: 'Equipe Criativa',
-                    assessment: 'Equipe de Avaliação'
+                    teaching: 'Neural Teaching',
+                    research: 'Deep Research', 
+                    creative: 'Creative AI',
+                    assessment: 'Smart Assessment'
                 };
                 
-                addMessage(`Equipe ${crewNames[currentCrew]} selecionada! Como posso ajudar?`, 'ai');
+                // Add selection message with modern styling
+                addMessage(`🚀 Módulo ${crewNames[currentCrew]} ativado! Pronto para explorar conhecimento avançado?`, 'ai');
+                
+                // Visual feedback
+                card.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    card.style.transform = '';
+                }, 150);
             });
         });
 
-        // Send message
+        // Enhanced send message functionality
         document.getElementById('sendButton').addEventListener('click', sendMessage);
         document.getElementById('messageInput').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') sendMessage();
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
         });
+
+        // Modern typing indicator
+        let typingIndicator = null;
 
         async function sendMessage() {
             const input = document.getElementById('messageInput');
@@ -252,9 +591,12 @@
             
             if (!message || isLoading) return;
             
+            // Add user message with animation
             addMessage(message, 'user');
             input.value = '';
             
+            // Show AI thinking
+            showAIThinking();
             setLoading(true);
             
             try {
@@ -266,19 +608,50 @@
                 
                 const data = await response.json();
                 
+                // Remove thinking indicator
+                removeAIThinking();
+                
                 if (data.response) {
                     addMessage(data.response, 'ai');
-                    updateStatus(`Respondido por ${data.metadata?.provider || 'Darcy AI'}`);
+                    updateStatus(`🧠 Processado por ${data.metadata?.provider || 'Sistema Neural'} | ${new Date().toLocaleTimeString()}`);
                 } else {
-                    addMessage('Desculpe, houve um erro. Tente novamente.', 'ai');
+                    addMessage('⚠️ Erro no processamento neural. Reiniciando sistemas...', 'ai');
                 }
             } catch (error) {
                 console.error('Error:', error);
-                addMessage('Erro de conexão. Verificando status da API...', 'ai');
+                removeAIThinking();
+                addMessage('🔧 Falha na conexão neural. Executando diagnósticos...', 'ai');
                 checkHealth();
             }
             
             setLoading(false);
+        }
+
+        function showAIThinking() {
+            const chatArea = document.getElementById('chatArea');
+            typingIndicator = document.createElement('div');
+            typingIndicator.className = 'message ai ai-thinking';
+            typingIndicator.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <strong>🤖 Darcy AI:</strong> 
+                    <span>Processando com IA</span>
+                    <div class="thinking-dots">
+                        <div class="thinking-dot"></div>
+                        <div class="thinking-dot"></div>
+                        <div class="thinking-dot"></div>
+                    </div>
+                </div>
+            `;
+            
+            chatArea.appendChild(typingIndicator);
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+
+        function removeAIThinking() {
+            if (typingIndicator) {
+                typingIndicator.remove();
+                typingIndicator = null;
+            }
         }
 
         function addMessage(text, sender) {
@@ -287,46 +660,158 @@
             messageDiv.className = `message ${sender}`;
             
             if (sender === 'ai') {
-                messageDiv.innerHTML = `<strong>Darcy AI:</strong> ${text}`;
+                messageDiv.innerHTML = `<strong>🤖 Darcy AI Neural:</strong> ${text}`;
             } else {
-                messageDiv.innerHTML = `<strong>Você:</strong> ${text}`;
+                messageDiv.innerHTML = `<strong>👤 Você:</strong> ${text}`;
             }
             
             chatArea.appendChild(messageDiv);
             chatArea.scrollTop = chatArea.scrollHeight;
+            
+            // Add pulse effect for new messages
+            messageDiv.style.transform = 'scale(0.95)';
+            messageDiv.style.opacity = '0';
+            
+            setTimeout(() => {
+                messageDiv.style.transform = 'scale(1)';
+                messageDiv.style.opacity = '1';
+            }, 100);
         }
 
         function setLoading(loading) {
             isLoading = loading;
             const button = document.getElementById('sendButton');
-            const status = document.getElementById('status');
+            const buttonText = document.getElementById('buttonText');
+            const input = document.getElementById('messageInput');
             
             if (loading) {
                 button.disabled = true;
-                button.innerHTML = '<div class="loading"></div>';
-                status.innerHTML = '🤖 Darcy está pensando...';
+                buttonText.innerHTML = '<div class="loading"></div>';
+                input.disabled = true;
+                input.style.opacity = '0.7';
             } else {
                 button.disabled = false;
-                button.innerHTML = 'Enviar';
+                buttonText.innerHTML = 'Enviar';
+                input.disabled = false;
+                input.style.opacity = '1';
             }
         }
 
         function updateStatus(message) {
-            document.getElementById('status').innerHTML = `✅ ${message}`;
+            const statusEl = document.getElementById('status');
+            statusEl.innerHTML = message;
+            
+            // Add glow effect
+            statusEl.style.textShadow = '0 0 10px rgba(79, 172, 254, 0.5)';
+            setTimeout(() => {
+                statusEl.style.textShadow = '';
+            }, 1000);
         }
 
         async function checkHealth() {
             try {
                 const response = await fetch('/api/health');
                 const data = await response.json();
-                updateStatus(`Sistema saudável - ${data.version}`);
+                updateStatus(`✅ Sistema Neural Online | v${data.version} | ${new Date().toLocaleTimeString()}`);
             } catch (error) {
-                updateStatus('❌ Erro de conecton com a API');
+                updateStatus('❌ Sistemas neurais offline - Reconectando...');
+                
+                // Retry connection
+                setTimeout(() => {
+                    checkHealth();
+                }, 3000);
             }
         }
 
-        // Initialize
-        checkHealth();
+        // Enhanced initialization with startup animation
+        function initializeApp() {
+            // Animate container entrance
+            const container = document.querySelector('.container');
+            container.style.opacity = '0';
+            container.style.transform = 'translateY(50px) scale(0.9)';
+            
+            setTimeout(() => {
+                container.style.transition = 'all 0.8s ease-out';
+                container.style.opacity = '1';
+                container.style.transform = 'translateY(0) scale(1)';
+            }, 100);
+            
+            // Start health check
+            checkHealth();
+            
+            // Add welcome animation
+            setTimeout(() => {
+                const logo = document.querySelector('.logo');
+                logo.style.animation = 'pulse 2s ease-in-out infinite';
+            }, 1000);
+        }
+
+        // Auto-resize input
+        const messageInput = document.getElementById('messageInput');
+        messageInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+        });
+
+        // Add particle effects on interactions
+        function createParticle(x, y) {
+            const particle = document.createElement('div');
+            particle.style.cssText = `
+                position: fixed;
+                left: ${x}px;
+                top: ${y}px;
+                width: 4px;
+                height: 4px;
+                background: linear-gradient(45deg, #4facfe, #00f2fe);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 1000;
+                animation: particleFloat 2s ease-out forwards;
+            `;
+            
+            document.body.appendChild(particle);
+            
+            setTimeout(() => {
+                particle.remove();
+            }, 2000);
+        }
+
+        // Add particle animation CSS
+        const particleStyle = document.createElement('style');
+        particleStyle.textContent = `
+            @keyframes particleFloat {
+                0% {
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                }
+                100% {
+                    opacity: 0;
+                    transform: translateY(-100px) scale(0);
+                }
+            }
+        `;
+        document.head.appendChild(particleStyle);
+
+        // Add click particles to crew cards
+        document.querySelectorAll('.crew-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = rect.left + rect.width / 2;
+                const y = rect.top + rect.height / 2;
+                
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        createParticle(
+                            x + (Math.random() - 0.5) * 50,
+                            y + (Math.random() - 0.5) * 50
+                        );
+                    }, i * 100);
+                }
+            });
+        });
+
+        // Initialize the app
+        initializeApp();
     </script>
 </body>
 </html>
